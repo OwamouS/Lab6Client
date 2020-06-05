@@ -1,10 +1,13 @@
 package productdata;
 import Control.TableController;
 import Exceptions.NegativePrice;
+
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Product {
+public class Product implements Serializable {
     private static long idCounter;
+    private static final long SerialVersionUID = 1;
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null

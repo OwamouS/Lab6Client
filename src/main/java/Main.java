@@ -1,3 +1,4 @@
+import Client.ClientController;
 import Control.*;
 
 import java.io.*;
@@ -28,10 +29,11 @@ public class Main {
                 Initializer.init(prodTable, null);
             }
         }
+        ClientController.connect();
         CommandController cmd = new CommandController();
         System.out.println("Enter Command \n" +
                 "or Help to display a list of commands:");
-        cmd.start(new CommandInterpreter());
+        cmd.start(new ClientInterpreter());
         cmd.stop();
     }
 }

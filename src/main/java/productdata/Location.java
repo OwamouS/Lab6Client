@@ -1,9 +1,12 @@
 package productdata;
 
+import java.io.Serializable;
+
 /**
  * Class that represents a Location of organization
  */
-public class Location {
+public class Location implements Serializable {
+    private static final long SerialVersionUID = 5;
     private Long x; //Поле не может быть null
     private int y;
     private Long z; //Поле не может быть null

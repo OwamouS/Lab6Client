@@ -1,9 +1,12 @@
 package productdata;
 
+import java.io.Serializable;
+
 /**
  * Class that represents a Adress data of Product
  */
-public class Address {
+public class Address implements Serializable {
+    private static final long SerialVersionUID = 3;
     private String street; //Поле не может быть null
     private Location town; //Поле может быть null
 

@@ -2,11 +2,14 @@ package productdata;
 import Exceptions.NotUniqueFullName;
 import Exceptions.TooLargeFullName;
 
+import java.io.Serializable;
+
 /**
  * Class that represents a organization that produces a Product
  */
-public class Organization {
+public class Organization implements Serializable {
     private static int orgId;
+    private static final long SerialVersionUID = 2;
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private String fullName; //Длина строки не должна быть больше 1404, Значение этого поля должно быть уникальным, Поле не может быть null
