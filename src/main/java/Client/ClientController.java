@@ -5,37 +5,23 @@ import cmd.Command;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ClientController {
 
     private static DatagramSocket clientSocket = null;
+    private static String inetIP = "localhost";
 
     public static void takeCommand (Command command, String[] args){
-        byte[] serializedCommand;
-        byte[] serializedArgs;
-        StringBuilder arguments = new StringBuilder("");
-        if(args != null) {
-            for (String line : args) {
-                arguments.append(line);
-                arguments.append(";");
-            }
-        }
-        else arguments = null;
-        byte[][] temp = CommandSerializer.serializeCommand(command,arguments != null ? arguments.toString():null);
-        serializedCommand = temp != null ? temp[0] : new byte[0];
-        serializedArgs = temp != null ? temp[1] : new byte[0];
+        byte[] serializedCommand = CommandSerializer.serializeCommand(command);
         Sender.send(serializedCommand);
-        Sender.send(serializedArgs);
         getReply();
     }
 
     public static void connect(){
         try {
-            clientSocket = new DatagramSocket();
+            clientSocket = new DatagramSocket(1338);
             clientSocket.setSoTimeout(1000);
         }
         catch (SocketException e){
@@ -49,29 +35,62 @@ public class ClientController {
 
     public static void getReply() {
         byte[] buf = new byte[1024];
+        byte[] clear = new byte[1024];
+        byte[] bad = new byte[1024];
+        clear[0] = 111;
+        bad[0] = 22;
         try {
-            while (true){
+            byte[] result = new byte[0];
+            while (true) {
+
                 DatagramPacket fromServer = new DatagramPacket(buf, 1024);
                 clientSocket.receive(fromServer);
-                ByteArrayInputStream bais = new ByteArrayInputStream(fromServer.getData());
+
                 if (Arrays.equals(fromServer.getData(), new byte[1024])) {
                     break;
                 }
-                ObjectInputStream ois = new ObjectInputStream(bais);
-                String result = (String) ois.readObject();
-                System.out.print(result);
-                DatagramPacket accept = new DatagramPacket(new byte[1],1024,InetAddress.getLocalHost(),1337);
+
+                if (checkHash(fromServer.getData())) {
+                    DatagramPacket toServer = new DatagramPacket(clear,
+                            1024, InetAddress.getByName(inetIP), 1337);
+                    clientSocket.send(toServer);
+                    result = merge(result,Arrays.copyOfRange(fromServer.getData(),0,1012));
+                }
+                else {
+                    DatagramPacket toServer = new DatagramPacket(bad,
+                            1024, InetAddress.getByName(inetIP), 1337);
+                    clientSocket.send(toServer);
+                }
             }
         }
-        catch (SocketTimeoutException e){
+        catch(SocketTimeoutException e){
+            }
+        catch(IOException e){
+            }
+    }
 
+    protected static boolean checkHash(byte[] data){
+        int hashCode = Arrays.hashCode(Arrays.copyOfRange(data,0,1012));
+        int i = 0;
+        int code = 0;
+        while ( data[1013 + i] != 111){
+            code += data[1013 + i] * Math.pow(10,i);
+            i++;
         }
-        catch (IOException e){
+        return (hashCode == code * data[1012]);
+    }
 
+    public static String getInetIP() {
+        return inetIP;
+    }
+
+    protected static byte[] merge(byte[] a1, byte[] a2){
+        byte[] result = Arrays.copyOf(a1,a1.length + a2.length);
+        int i = 0;
+        for (byte b : a2){
+            result[a1.length + i] = b;
+            i++;
         }
-        catch (ClassNotFoundException e){
-
-        }
-
+        return result;
     }
 }
