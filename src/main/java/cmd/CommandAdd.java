@@ -1,6 +1,7 @@
 package cmd;
 import Control.Initializer;
 import Control.TableController;
+import productdata.Product;
 import productdata.ReaderProductBuilder;
 
 import java.io.BufferedReader;
@@ -12,7 +13,7 @@ import java.io.InputStreamReader;
  *
  */
 
-public class CommandAdd implements Command{
+public class CommandAdd implements Command, Preparable{
 
     /**
      * insert product to hashtable
@@ -20,25 +21,17 @@ public class CommandAdd implements Command{
      * @param args is key to new product
      */
 
+    Product product = null;
+    String key = null;
+
+
     @Override
     public void execute(String[] args) {
-        if (args == null) {
-            String key;
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            try {
-                do {
-                    System.out.println(" Enter product key: ");
-                    key = reader.readLine();
-                    if (key == null) System.out.println("Error: null key.");
-                } while (key == null);
-                TableController.getCurrentTable().put(key, ReaderProductBuilder.buildProduct(reader));
-                System.out.println("Insertion complete...");
-            } catch (Exception e) {
-                System.out.println("Key is null, please try again with valid key...");
-            }
+        if (product == null || key == null){
+            prepare(args);
         }
-        else{
-            Initializer.build(TableController.getCurrentTable(),args);
+        else {
+            TableController.getCurrentTable().put(key, product);
             System.out.println("Insertion complete...");
         }
     }
@@ -52,5 +45,28 @@ public class CommandAdd implements Command{
     @Override
     public String toString() {
         return "insert";
+    }
+
+    @Override
+    public void prepare(String[] args) {
+        if (args == null) {
+            String key;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                do {
+                    System.out.println(" Enter product key: ");
+                    key = reader.readLine();
+                    if (key == null) System.out.println("Error: null key.");
+                } while (key == null);
+                this.key = key;
+                this.product = ReaderProductBuilder.buildProduct(reader);
+            } catch (Exception e) {
+                System.out.println("Key is null, please try again with valid key...");
+            }
+        }
+        else{
+            this.product = Initializer.build(args);
+            this.key = args[0];
+        }
     }
 }

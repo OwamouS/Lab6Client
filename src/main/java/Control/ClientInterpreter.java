@@ -2,12 +2,12 @@ package Control;
 
 
 import Client.ClientController;
+import Client.Request;
+import Client.RequestManager;
 import Control.cmdLists.CommandList;
 import Control.cmdLists.StdCommandList;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 //client
@@ -39,7 +39,7 @@ public class ClientInterpreter implements Interpreter {
                         arguments[i] = "";
                     }
                 }
-                ClientController.takeCommand(cmdList.getCommands().get(args[0]),arguments);;
+                RequestManager.makeRequest(cmdList.getCommands().get(args[0]),arguments);;
             } catch (NullPointerException e){
                 e.printStackTrace();
                 System.out.println("Wrong arguments...");
