@@ -6,7 +6,8 @@ import java.io.Serializable;
  * Class that represents a Location of organization
  */
 public class Location implements Serializable {
-    private static final long SerialVersionUID = 5;
+
+    private static final long serialVersionUID = 1337000019L;
     private Long x; //Поле не может быть null
     private int y;
     private Long z; //Поле не может быть null

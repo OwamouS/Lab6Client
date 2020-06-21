@@ -10,6 +10,8 @@ import Client.ClientController;
 
 public class CommandExit implements Command, Local{
 
+    private static final long serialVersionUID = 1337000005L;
+
     @Override
     public void execute(String[] args){
         try {

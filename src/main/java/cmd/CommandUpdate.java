@@ -25,6 +25,7 @@ public class CommandUpdate implements Command, Preparable{
      */
 
     Product product = null;
+    private static final long serialVersionUID = 1337000016L;
 
     @Override
     public void execute(String[] args) {

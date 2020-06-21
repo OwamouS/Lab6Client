@@ -10,5 +10,5 @@ public enum OrganizationType implements Serializable {
     TRUST,
     PRIVATE_LIMITED_COMPANY;
 
-    private static final long SerialVersionUID = 6;
+    private static final long serialVersionUID = 1337000021L;
 }

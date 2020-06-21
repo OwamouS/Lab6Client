@@ -7,7 +7,7 @@ import java.io.Serializable;
  * Class that represents a coordinates of a Product
  */
 public class Coordinates implements Serializable {
-    private static final long SerialVersionUID = 4;
+    private static final long serialVersionUID = 1337000018L;
     private double x;
     private Integer y; //Значение поля должно быть больше -150, Поле не может быть null
 

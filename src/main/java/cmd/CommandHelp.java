@@ -10,6 +10,8 @@ import java.util.Arrays;
 
 public class CommandHelp implements Command {
 
+    private static final long serialVersionUID = 1337000008L;
+
     @Override
     public void execute(String[] args){
         try {

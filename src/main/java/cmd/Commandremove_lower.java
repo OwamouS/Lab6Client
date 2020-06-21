@@ -12,6 +12,8 @@ import java.util.*;
 
 public class Commandremove_lower implements Command{
 
+    private static final long serialVersionUID = 1337000013L;
+
     /**
      * Iterates through hashtable and remove all elements with id lower than one's given
      *

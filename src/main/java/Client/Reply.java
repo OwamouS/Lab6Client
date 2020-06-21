@@ -1,16 +1,27 @@
 package Client;
 
+import productdata.Product;
+
 import java.io.Serializable;
+import java.util.concurrent.ConcurrentSkipListSet;
 
 public class Reply implements Serializable {
 
-    String result;
+    private ConcurrentSkipListSet<Product> products;
+    private String answer;
+    private static final long serialVersionUID = 1L;
 
-    public Reply(String result){
-        this.result = result;
+    public Reply(ConcurrentSkipListSet<Product> collection, String message){
+        this.products = collection;
+        this.answer = message;
     }
 
-    protected String getResult() {
-        return result;
+    public ConcurrentSkipListSet<Product> getProducts(){
+        return products;
     }
+
+    public String getAnswer(){
+        return answer;
+    }
+
 }

@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 public class CommandExecute_Script implements Command, Preparable{
 
+    private static final long serialVersionUID = 1337000004L;
+
     ArrayList<String[]> commands;
 
     @Override

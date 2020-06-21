@@ -6,6 +6,8 @@ import java.io.IOException;
 
 public class CommandConnect implements Command, Local{
 
+    private static final long serialVersionUID = 1337000003L;
+
     @Override
     public void execute(String[] args) throws IOException {
         if (args == null ||  args.length != 2){

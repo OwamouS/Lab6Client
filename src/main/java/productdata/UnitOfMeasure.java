@@ -8,5 +8,7 @@ public enum UnitOfMeasure {
     CENTIMETERS,
     PCS,
     LITERS,
-    MILLILITERS
+    MILLILITERS;
+
+    private static final long serialVersionUID = 1337000023L;
 }

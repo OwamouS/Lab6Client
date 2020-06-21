@@ -19,6 +19,7 @@ public class CommandAdd implements Command, Preparable{
 
     Product product = null;
     String key = null;
+    private static final long serialVersionUID = 1337000000L;
 
     /**
      * insert product to hashtable

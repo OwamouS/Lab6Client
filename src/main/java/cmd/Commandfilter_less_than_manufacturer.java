@@ -18,6 +18,7 @@ public class Commandfilter_less_than_manufacturer implements Command {
      * counter will control a situation when all elements have higher manufacturer id than one's given
      */
     private int counter;
+    private static final long serialVersionUID = 1337000006L;
 
     @Override
     public void execute(String[] args) {

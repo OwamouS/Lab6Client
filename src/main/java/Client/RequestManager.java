@@ -35,7 +35,10 @@ public class RequestManager {
         }
         Reply result = ClientController.handleRequest(new Request(command, args));
         if (result != null) {
-            System.out.println(result.getResult());
+            if (result.getAnswer() != null) System.out.print(result.getAnswer());
+            if (result.getProducts() != null){
+                result.getProducts().forEach((k) -> System.out.println(k.toString()));
+            }
         }
 
     }

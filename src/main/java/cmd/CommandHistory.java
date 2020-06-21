@@ -10,6 +10,9 @@ import java.util.List;
  */
 
 public class CommandHistory implements Command{
+
+    private static final long serialVersionUID = 1337000009L;
+
     private static List<String> history = new ArrayList<>();
 
     public void addCommand(String name) {

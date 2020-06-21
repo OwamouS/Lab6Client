@@ -13,6 +13,9 @@ import java.util.*;
  */
 
 public class Commandgroup_counting_by_coordinates implements Command {
+
+    private static final long serialVersionUID = 1337000007L;
+
     @Override
     public void execute(String[] args) {
         try {

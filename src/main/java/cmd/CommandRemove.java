@@ -13,6 +13,8 @@ import java.util.Set;
 
 public class CommandRemove implements Command {
 
+    private static final long serialVersionUID = 1337000012L;
+
     @Override
     public void execute(String[] args) {
         int count = 0;

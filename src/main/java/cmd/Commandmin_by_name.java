@@ -14,6 +14,8 @@ import java.util.Map;
 
 public class Commandmin_by_name implements Command {
 
+    private static final long serialVersionUID = 1337000011L;
+
     @Override
     public void execute(String[] args) {
         try {

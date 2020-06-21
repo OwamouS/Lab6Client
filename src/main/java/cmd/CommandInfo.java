@@ -12,6 +12,8 @@ import java.util.Hashtable;
 
 public class CommandInfo implements Command {
 
+    private static final long serialVersionUID = 1337000010L;
+
     @Override
     public void execute(String[] args) {
         try {
