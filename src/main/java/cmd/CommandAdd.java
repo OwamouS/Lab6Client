@@ -15,20 +15,21 @@ import java.io.InputStreamReader;
 
 public class CommandAdd implements Command, Preparable{
 
+
+
+    Product product = null;
+    String key = null;
+
     /**
      * insert product to hashtable
      *
      * @param args is key to new product
      */
-
-    Product product = null;
-    String key = null;
-
-
     @Override
     public void execute(String[] args) {
         if (product == null || key == null){
             prepare(args);
+            execute(args);
         }
         else {
             TableController.getCurrentTable().put(key, product);

@@ -1,11 +1,15 @@
 package Client;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.*;
 
 public class ClientController {
 
     private static DatagramSocket clientSocket = null;
     private static InetAddress destIP = null;
+    private static int destPort = 1337;
 
     public static Reply handleRequest(Request request){
         byte[] serializedRequest = Serializer.serialize(request);
@@ -18,11 +22,37 @@ public class ClientController {
     public static void connect(){
         try {
             clientSocket = new DatagramSocket(1338);
-            clientSocket.setSoTimeout(1000);
+            clientSocket.setSoTimeout(10000);
             changeDestIP("localhost");
         }
-        catch (SocketException e){
+        catch (BindException e){
+            System.out.println("Your port already in use, please choose another port:");
+            int port = changePort();
+            connect(port);
         }
+        catch (SocketException e){
+            System.out.println("Port is unavailable, please choose another port:");
+            int port = changePort();
+            connect(port);
+        }
+    }
+
+    public static int changePort() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        int port;
+        while (true) {
+            try {
+                System.out.println(reader.readLine());
+                String p = reader.readLine();
+
+                port = Integer.parseInt(p);
+                break;
+            } catch (IOException | NumberFormatException ex) {
+                ex.printStackTrace();
+                System.out.println("Please enter a correct port:");
+            }
+        }
+        return port;
     }
 
     public static void connect(int number){
@@ -31,7 +61,15 @@ public class ClientController {
             clientSocket.setSoTimeout(1000);
             changeDestIP("localhost");
         }
+        catch (BindException e){
+            System.out.println("Your port already in use, please choose another port:");
+            int port = changePort();
+            connect(port);
+        }
         catch (SocketException e){
+            System.out.println("Port is unavailable, please choose another port:");
+            int port = changePort();
+            connect(port);
         }
     }
 
@@ -41,7 +79,15 @@ public class ClientController {
             clientSocket.setSoTimeout(1000);
             changeDestIP(IP);
         }
+        catch (BindException e){
+            System.out.println("Your port already in use, please choose another port:");
+            int port = changePort();
+            connect(port);
+        }
         catch (SocketException e){
+            System.out.println("Port is unavailable, please choose another port:");
+            int port = changePort();
+            connect(port);
         }
     }
 
@@ -58,7 +104,24 @@ public class ClientController {
             destIP = InetAddress.getByName(name);
         }
         catch (UnknownHostException e){
-
+            System.out.println("IP address is not determined, please enter correct IP address:");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            String IP;
+            while (true) {
+                try {
+                    IP = reader.readLine();
+                    break;
+                } catch (IOException ex) {
+                    System.out.println("Please enter a correct port:");
+                }
+            }
+            changeDestIP(IP);
         }
     }
+
+    public static void setDestPort(int destPort) {
+        ClientController.destPort = destPort;
+    }
 }
+
+

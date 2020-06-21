@@ -31,6 +31,7 @@ public class CommandUpdate implements Command, Preparable{
 
         if (product == null){
             prepare(args);
+            execute(args);
         }
         else {
             try {

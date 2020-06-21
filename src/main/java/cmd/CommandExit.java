@@ -1,12 +1,14 @@
 package cmd;
 
+import Client.ClientController;
+
 /**
  * break the programm
  *
  *
  */
 
-public class CommandExit implements Command {
+public class CommandExit implements Command, Local{
 
     @Override
     public void execute(String[] args){
@@ -15,6 +17,7 @@ public class CommandExit implements Command {
                 System.out.println("There is no args for this command!");
             }
         }catch (NullPointerException e) {
+            ClientController.getClientSocket().close();
             System.out.println("Program completion...");
             System.exit(0);
         }

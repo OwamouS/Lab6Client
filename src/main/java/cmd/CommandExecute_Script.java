@@ -19,6 +19,7 @@ public class CommandExecute_Script implements Command, Preparable{
     public void execute(String[] args) throws IOException {
         if (commands == null){
             ScriptParser.parseScript(args[0]);
+            execute(args);
         }
         else {
             ScriptParser.executeQuery(commands);

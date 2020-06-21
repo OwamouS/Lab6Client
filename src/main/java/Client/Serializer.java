@@ -1,6 +1,7 @@
 package Client;
 
 import java.io.*;
+import java.util.Arrays;
 
 public class Serializer {
 
@@ -22,15 +23,18 @@ public class Serializer {
 
     protected static Reply deserialize(byte[] data){
         try{
-            ByteArrayInputStream bais = new ByteArrayInputStream(data);
-            ObjectInputStream ois = new ObjectInputStream(bais);
-            return (Reply) ois.readObject();
+            if (data != null) {
+                ObjectInput ois = new ObjectInputStream(new ByteArrayInputStream(data));
+                return (Reply) ois.readObject();
+            }
         }
         catch (IOException ioException) {
+            System.out.println("Oh no, some IO exception occurs.");
         }
         catch (ClassNotFoundException classNotFoundException){
+            System.out.println("An unknown format response was received from the server, " +
+                    "please change the connection to the correct server.");
         }
-
         return null;
     }
     

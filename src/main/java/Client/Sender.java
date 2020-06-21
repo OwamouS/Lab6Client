@@ -2,6 +2,8 @@ package Client;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.util.Arrays;
 
 public class Sender {
@@ -39,8 +41,11 @@ public class Sender {
             ClientController.getClientSocket().send(commandPacket);
 
         }
+        catch (SocketTimeoutException e){
+            System.out.println("Server is not responding, please, try again later or change connection.");
+        }
         catch (IOException e){
-
+            System.out.println("Oh no, some IO ecxeption occurs, please, try again");
         }
     }
 }

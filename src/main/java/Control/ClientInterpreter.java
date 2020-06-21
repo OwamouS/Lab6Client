@@ -1,13 +1,10 @@
 package Control;
 
 
-import Client.ClientController;
-import Client.Request;
+
 import Client.RequestManager;
 import Control.cmdLists.CommandList;
 import Control.cmdLists.StdCommandList;
-
-import java.io.IOException;
 import java.util.Arrays;
 
 //client
@@ -24,10 +21,9 @@ public class ClientInterpreter implements Interpreter {
      * This method takes the command, separate it on command and arguments
      * and then interpret command according to the current Command List
      * @param args Command
-     * @throws IOException If an I/O error occurs
      */
     @Override
-    public void handle(String[] args) throws IOException {
+    public void handle(String[] args) {
         if (cmdList.getCommands().containsKey(args[0])) {
             try {
                 String[] arguments;
@@ -39,7 +35,8 @@ public class ClientInterpreter implements Interpreter {
                         arguments[i] = "";
                     }
                 }
-                RequestManager.makeRequest(cmdList.getCommands().get(args[0]),arguments);;
+                RequestManager.makeRequest(cmdList.getCommands().get(args[0]),arguments);
+                System.out.println("Enter command:");
             } catch (NullPointerException e){
                 e.printStackTrace();
                 System.out.println("Wrong arguments...");

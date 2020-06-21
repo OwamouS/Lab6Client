@@ -1,7 +1,6 @@
 package Control.cmdLists;
 
 import Control.CommandController;
-import Control.cmdLists.CommandList;
 import cmd.*;
 
 import java.util.HashMap;
@@ -21,7 +20,6 @@ public class StdCommandList implements CommandList {
         CommandHelp commandHelp = new CommandHelp();
         CommandInfo commandInfo = new CommandInfo();
         CommandClear commandClear = new CommandClear();
-        CommandSave commandSave = new CommandSave();
         CommandShow commandShow = new CommandShow();
         CommandAdd commandAdd = new CommandAdd();
         Commandmin_by_name commandMin = new Commandmin_by_name();
@@ -33,13 +31,14 @@ public class StdCommandList implements CommandList {
         Commandremove_lower commandremove_lower = new Commandremove_lower();
         Commandfilter_less_than_manufacturer commandfilter_less_than_manufacturer = new Commandfilter_less_than_manufacturer();
         Commandgroup_counting_by_coordinates commandgroup_counting_by_coordinates = new Commandgroup_counting_by_coordinates();
+        CommandChangePort commandChangePort = new CommandChangePort();
+        CommandConnect commandConnect = new CommandConnect();
 
         commands.put("help", commandHelp);
         commands.put("replace_if_greater",commandreplaceIfGreater);
         commands.put("info", commandInfo);
         commands.put("group_counting_by_coordinates",commandgroup_counting_by_coordinates);
         commands.put("clear", commandClear);
-        commands.put("save", commandSave);
         commands.put("show", commandShow);
         commands.put("history", CommandController.getCommandHistory());
         commands.put("insert", commandAdd);
@@ -50,6 +49,8 @@ public class StdCommandList implements CommandList {
         commands.put("exit", commandExit);
         commands.put("remove_lower", commandremove_lower);
         commands.put("filter_less_than_manufacturer", commandfilter_less_than_manufacturer);
+        commands.put("change_port", commandChangePort);
+        commands.put("connect", commandConnect);
     }
 
     /**

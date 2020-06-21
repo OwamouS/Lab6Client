@@ -31,7 +31,7 @@ public class Main {
             }
         }
 
-        ClientController.connect(1337);
+        ClientController.connect(1339);
         CommandController cmd = new CommandController();
         System.out.println("Enter Command \n" +
                 "or Help to display a list of commands:");

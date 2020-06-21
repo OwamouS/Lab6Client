@@ -18,7 +18,6 @@ public class Receiver {
         try {
             byte[] result = new byte[0];
             while (true) {
-
                 DatagramPacket fromServer = new DatagramPacket(buf, 1024);
                 ClientController.getClientSocket().receive(fromServer);
 
@@ -42,8 +41,10 @@ public class Receiver {
             return result;
         }
         catch(SocketTimeoutException e){
+            System.out.println("Server is no responding, please, try again later or change connection.");
         }
         catch(IOException e){
+            System.out.println("Oh no, some IO exception occurs.");
         }
         return null;
     }
