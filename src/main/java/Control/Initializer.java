@@ -72,7 +72,7 @@ public class Initializer {
                 }
             }
             bufferedReader.close();
-            System.out.println("Initializing complete...");
+            System.out.println("Initializing complete...\n");
 
         }
         catch (IllegalAccessException a) {

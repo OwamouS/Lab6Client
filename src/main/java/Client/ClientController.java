@@ -14,8 +14,18 @@ public class ClientController {
     public static Reply handleRequest(Request request){
         byte[] serializedRequest = Serializer.serialize(request);
         assert serializedRequest != null;
-        Sender.send(serializedRequest);
-        byte[] reply = Receiver.getReply();
+        byte[] reply = null;
+        try {
+            Sender.send(serializedRequest);
+            reply = Receiver.getReply();
+        }
+        catch(SocketTimeoutException e){
+            System.out.println("Server is not responding, please, try again later or change connection.");
+            return null;
+        }
+        catch (IOException e){
+            System.out.print("Oh no, some IO Exception occurs, please, try again.");
+        }
         return Serializer.deserialize(reply);
     }
 
@@ -24,6 +34,7 @@ public class ClientController {
             clientSocket = new DatagramSocket(1338);
             clientSocket.setSoTimeout(10000);
             changeDestIP("localhost");
+            System.out.println("Port has been successfully changed.");
         }
         catch (BindException e){
             System.out.println("Your port already in use, please choose another port:");
@@ -42,7 +53,6 @@ public class ClientController {
         int port;
         while (true) {
             try {
-                System.out.println(reader.readLine());
                 String p = reader.readLine();
 
                 port = Integer.parseInt(p);
@@ -60,6 +70,7 @@ public class ClientController {
             clientSocket = new DatagramSocket(number);
             clientSocket.setSoTimeout(1000);
             changeDestIP("localhost");
+            System.out.println("Port has been successfully changed.");
         }
         catch (BindException e){
             System.out.println("Your port already in use, please choose another port:");
@@ -78,6 +89,7 @@ public class ClientController {
             clientSocket = new DatagramSocket(number);
             clientSocket.setSoTimeout(1000);
             changeDestIP(IP);
+            System.out.println("Port has been successfully changed.");
         }
         catch (BindException e){
             System.out.println("Your port already in use, please choose another port:");
@@ -102,6 +114,7 @@ public class ClientController {
     public static void changeDestIP(String name){
         try {
             destIP = InetAddress.getByName(name);
+            System.out.println("IP has been successfully changed.");
         }
         catch (UnknownHostException e){
             System.out.println("IP address is not determined, please enter correct IP address:");
@@ -121,6 +134,11 @@ public class ClientController {
 
     public static void setDestPort(int destPort) {
         ClientController.destPort = destPort;
+        System.out.println("Port has been successfully changed.");
+    }
+
+    public static int getDestPort() {
+        return destPort;
     }
 }
 

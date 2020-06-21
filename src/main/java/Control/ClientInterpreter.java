@@ -36,7 +36,6 @@ public class ClientInterpreter implements Interpreter {
                     }
                 }
                 RequestManager.makeRequest(cmdList.getCommands().get(args[0]),arguments);
-                System.out.println("Enter command:");
             } catch (NullPointerException e){
                 e.printStackTrace();
                 System.out.println("Wrong arguments...");

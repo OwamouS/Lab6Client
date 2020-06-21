@@ -3,9 +3,7 @@ package Client;
 import cmd.Command;
 import cmd.Local;
 import cmd.Preparable;
-
 import java.io.IOException;
-import java.util.Arrays;
 
 public class RequestManager {
 
@@ -31,7 +29,9 @@ public class RequestManager {
             return;
         }
         if (command instanceof Preparable){
-            ((Preparable) cmd).prepare(args);
+            if (cmd != null) {
+                ((Preparable) cmd).prepare(args);
+            }
         }
         Reply result = ClientController.handleRequest(new Request(command, args));
         if (result != null) {

@@ -31,12 +31,13 @@ public class CommandController {
             String line = reader.readLine();
             while (isOn){
                 if(line == null){
-                System.exit(0);
-            }
+                    System.exit(0);
+                 }
                 if(!"".equals(line)) {
                     interpreter.handle(line.split(" "));
                     System.out.println("\nEnter command:");
                 }
+                System.out.print(">");
                 line = reader.readLine();
             }
         }
