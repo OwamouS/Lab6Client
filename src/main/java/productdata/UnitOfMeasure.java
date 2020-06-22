@@ -1,9 +1,11 @@
 package productdata;
 
+import java.io.Serializable;
+
 /**
  * Class that represents all Units of Measure
  */
-public enum UnitOfMeasure {
+public enum UnitOfMeasure implements Serializable {
     KILOGRAMS,
     CENTIMETERS,
     PCS,

@@ -1,5 +1,7 @@
 package Client;
 
+import cliser.Reply;
+
 import java.io.*;
 import java.util.Arrays;
 

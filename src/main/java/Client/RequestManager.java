@@ -1,5 +1,7 @@
 package Client;
 
+import cliser.Reply;
+import cliser.Request;
 import cmd.Command;
 import cmd.Local;
 import cmd.Preparable;
@@ -33,7 +35,7 @@ public class RequestManager {
                 ((Preparable) cmd).prepare(args);
             }
         }
-        Reply result = ClientController.handleRequest(new Request(command, args));
+        Reply result = ClientController.handleRequest(new Request(cmd, args));
         if (result != null) {
             if (result.getAnswer() != null) System.out.print(result.getAnswer());
             if (result.getProducts() != null){

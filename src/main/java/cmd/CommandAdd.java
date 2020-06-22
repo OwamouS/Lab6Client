@@ -6,6 +6,7 @@ import productdata.ReaderProductBuilder;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 
 /**
  * get name of command
@@ -13,12 +14,12 @@ import java.io.InputStreamReader;
  *
  */
 
-public class CommandAdd implements Command, Preparable{
+public class CommandAdd implements Command, Preparable, Serializable {
 
 
 
-    Product product = null;
-    String key = null;
+    Product product;
+    String key;
     private static final long serialVersionUID = 1337000000L;
 
     /**
@@ -29,6 +30,7 @@ public class CommandAdd implements Command, Preparable{
     @Override
     public String execute(String[] args) {
         if (product == null || key == null){
+            System.out.print(key);
             prepare(args);
             execute(args);
         }
@@ -72,4 +74,5 @@ public class CommandAdd implements Command, Preparable{
             this.key = args[0];
         }
     }
+
 }

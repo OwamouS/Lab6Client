@@ -36,8 +36,9 @@ public class PacketFunctions {
     protected static int uniteIntoInt( byte[] data ){
         int res = 0;
         int i = 0;
-        while ( data[i] != 111 ){
-            res += data[i]*Math.pow(10,i);
+        for (byte b: data) {
+            if (b == (byte) 111) break;
+            res += b*Math.pow(10,i);
             i++;
         }
         return res;

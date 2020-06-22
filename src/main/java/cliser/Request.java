@@ -1,8 +1,9 @@
-package Client;
+package cliser;
 
 import cmd.Command;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Request implements Serializable {
 
@@ -15,4 +16,15 @@ public class Request implements Serializable {
         this.command = cmd;
     }
 
+    public String[] getArgs() {
+        return args;
+    }
+
+    public Command getCommand() {
+        return command;
+    }
+    @Override
+    public String toString() {
+        return Arrays.toString(args) + command.toString();
+    }
 }

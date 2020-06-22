@@ -5,7 +5,6 @@ import productdata.Product;
 import productdata.ReaderProductBuilder;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.Map;
@@ -25,14 +24,12 @@ public class CommandUpdate implements Command, Preparable{
      */
 
     Product product = null;
-    private static final long serialVersionUID = 1337000016L;
 
     @Override
     public String execute(String[] args) {
 
         if (product == null){
             prepare(args);
-            execute(args);
         }
         else {
             try {
@@ -52,12 +49,11 @@ public class CommandUpdate implements Command, Preparable{
                 if (counter == 0) {
                     return ("There is no elements with that id.");
                 }
-                return ("Element was replaced.");
             } catch (NumberFormatException e) {
                 return ("Argument must be a number");
             }
         }
-        return null;
+        return "Element updated";
     }
 
     /**
