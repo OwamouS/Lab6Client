@@ -15,18 +15,19 @@ public class CommandShow implements Command {
     private static final long serialVersionUID = 1337000015L;
 
     @Override
-    public void execute(String[] args) {
+    public String execute(String[] args) {
         try {
             if (args.length == 1) {
-                System.out.println("There is no args for this command!");
+                return ("There is no args for this command!");
             }
         }catch (NullPointerException e) {
             if (TableController.getCurrentTable().getSize() == 0) {
-                System.out.println("Collection is empty!");
+                return ("Collection is empty!");
             } else {
-                TableController.getCurrentTable().show();
+                return TableController.getCurrentTable().show();
             }
         }
+        return null;
     }
 
     /**

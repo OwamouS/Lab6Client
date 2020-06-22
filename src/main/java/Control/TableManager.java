@@ -107,8 +107,10 @@ public class TableManager {
     /**
      * Prints the table to the console
      */
-    public void show(){
-        table.forEach((k,v) -> System.out.println(v.toString()));
+    public String show(){
+        StringBuilder stringBuilder = new StringBuilder("");
+        table.forEach((k,v) -> stringBuilder.append(v.toString()));
+        return stringBuilder.toString();
     }
 
     /**

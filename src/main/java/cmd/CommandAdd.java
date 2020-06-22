@@ -27,15 +27,16 @@ public class CommandAdd implements Command, Preparable{
      * @param args is key to new product
      */
     @Override
-    public void execute(String[] args) {
+    public String execute(String[] args) {
         if (product == null || key == null){
             prepare(args);
             execute(args);
         }
         else {
             TableController.getCurrentTable().put(key, product);
-            System.out.println("Insertion complete...");
+            return ("Insertion complete...");
         }
+        return null;
     }
 
     /**

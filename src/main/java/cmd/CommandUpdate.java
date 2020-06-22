@@ -28,7 +28,7 @@ public class CommandUpdate implements Command, Preparable{
     private static final long serialVersionUID = 1337000016L;
 
     @Override
-    public void execute(String[] args) {
+    public String execute(String[] args) {
 
         if (product == null){
             prepare(args);
@@ -37,7 +37,7 @@ public class CommandUpdate implements Command, Preparable{
         else {
             try {
                 if (args[0] == null) {
-                    System.out.println("Please enter ID");
+                    return ("Please enter ID");
                 }
                 int counter = 0;
                 Iterator<Map.Entry<String, Product>> it = TableController.getCurrentTable().getSet().iterator();
@@ -50,12 +50,14 @@ public class CommandUpdate implements Command, Preparable{
                     }
                 }
                 if (counter == 0) {
-                    System.out.println("There is no elements with that id.");
+                    return ("There is no elements with that id.");
                 }
+                return ("Element was replaced.");
             } catch (NumberFormatException e) {
-                System.out.println("Argument must be a number");
+                return ("Argument must be a number");
             }
         }
+        return null;
     }
 
     /**

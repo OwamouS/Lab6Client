@@ -18,13 +18,15 @@ public class CommandExecute_Script implements Command, Preparable{
     ArrayList<String[]> commands;
 
     @Override
-    public void execute(String[] args) throws IOException {
+    public String execute(String[] args) throws IOException {
         if (commands == null){
             ScriptParser.parseScript(args[0]);
             execute(args);
+            return null;
         }
         else {
             ScriptParser.executeQuery(commands);
+            return ("Script was successfully executed");
         }
     }
 

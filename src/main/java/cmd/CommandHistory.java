@@ -19,14 +19,15 @@ public class CommandHistory implements Command{
         history.add(name);
     }
 
-    public void execute(String[] args) {
+    public String execute(String[] args) {
         try {
             if (args.length == 1) {
-                System.out.println("There is no args for this command!");
+                return("There is no args for this command!");
             }
         }catch (NullPointerException e) {
-            System.out.println(history.subList(Math.max(history.size() - 7, 0), history.size()));
+            return String.valueOf((history.subList(Math.max(history.size() - 7, 0), history.size())));
         }
+        return null;
     }
 
     /**

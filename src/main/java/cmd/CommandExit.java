@@ -13,7 +13,7 @@ public class CommandExit implements Command, Local{
     private static final long serialVersionUID = 1337000005L;
 
     @Override
-    public void execute(String[] args){
+    public String execute(String[] args){
         try {
             if (args.length == 1) {
                 System.out.println("There is no args for this command!");
@@ -23,6 +23,7 @@ public class CommandExit implements Command, Local{
             System.out.println("Program completion...");
             System.exit(0);
         }
+        return null;
     }
 
     /**
