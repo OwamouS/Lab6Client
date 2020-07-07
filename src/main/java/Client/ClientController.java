@@ -29,6 +29,7 @@ public class ClientController {
         catch (IOException e){
             System.out.print("Oh no, some IO Exception occurs, please, try again.");
         }
+        assert reply != null;
         return Serializer.deserialize(reply);
     }
 
@@ -37,6 +38,11 @@ public class ClientController {
             clientSocket = new DatagramSocket(1338);
             clientSocket.setSoTimeout(10000);
             changeDestIP("localhost");
+            byte[] buf = new byte[1024];
+            buf[0]=1;
+            buf[1023]=1;
+            DatagramPacket packet = new DatagramPacket(buf,0,1024,ClientController.getDestIP(),ClientController.getDestPort());
+            clientSocket.send(packet);
             System.out.println("Port has been successfully changed.");
         }
         catch (BindException e){
@@ -48,6 +54,8 @@ public class ClientController {
             System.out.println("Port is unavailable, please choose another port:");
             int port = changePort();
             connect(port);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -73,6 +81,11 @@ public class ClientController {
             clientSocket = new DatagramSocket(number);
             clientSocket.setSoTimeout(1000);
             changeDestIP("localhost");
+            byte[] buf = new byte[1024];
+            buf[0]=1;
+            buf[1023]=1;
+            DatagramPacket packet = new DatagramPacket(buf,0,1024,ClientController.getDestIP(),ClientController.getDestPort());
+            clientSocket.send(packet);
             System.out.println("Port has been successfully changed.");
         }
         catch (BindException e){
@@ -84,6 +97,8 @@ public class ClientController {
             System.out.println("Port is unavailable, please choose another port:");
             int port = changePort();
             connect(port);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -92,6 +107,11 @@ public class ClientController {
             clientSocket = new DatagramSocket(number);
             clientSocket.setSoTimeout(1000);
             changeDestIP(IP);
+            byte[] buf = new byte[1024];
+            buf[0]=1;
+            buf[1023]=1;
+            DatagramPacket packet = new DatagramPacket(buf,0,1024,ClientController.getDestIP(),ClientController.getDestPort());
+            clientSocket.send(packet);
             System.out.println("Port has been successfully changed.");
         }
         catch (BindException e){
@@ -103,6 +123,8 @@ public class ClientController {
             System.out.println("Port is unavailable, please choose another port:");
             int port = changePort();
             connect(port);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

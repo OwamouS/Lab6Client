@@ -1,6 +1,9 @@
 package cmd;
 
 import Client.ClientController;
+import Client.Sender;
+
+import java.io.IOException;
 
 /**
  * break the programm
@@ -8,12 +11,10 @@ import Client.ClientController;
  *
  */
 
-public class CommandExit implements Command, Local{
-
-    private static final long serialVersionUID = 1337000005L;
+public class CommandExit implements Command{
 
     @Override
-    public String execute(String[] args){
+    public String execute(String[] args) throws IOException {
         try {
             if (args.length == 1) {
                 System.out.println("There is no args for this command!");

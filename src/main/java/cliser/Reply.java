@@ -7,8 +7,7 @@ import java.util.concurrent.ConcurrentSkipListSet;
 
 public class Reply implements Serializable {
 
-    private PlaceComparator comp = new PlaceComparator();
-    private ConcurrentSkipListSet<Product> products = new ConcurrentSkipListSet<>(comp);
+    private ConcurrentSkipListSet<Product> products;
     private String answer;
     private static final long serialVersionUID = 1338L;
 

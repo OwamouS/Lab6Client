@@ -17,6 +17,8 @@ import java.util.Map;
 
 public class CommandUpdate implements Command, Preparable{
 
+    private static final long serialVersionUID = 1337000016L;
+
     /**
      * Iterates through all elements of collection and update element with given id
      *

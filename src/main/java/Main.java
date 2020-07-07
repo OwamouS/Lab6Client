@@ -31,7 +31,7 @@ public class Main {
 //            }
 //        }
 
-        ClientController.connect(1339);
+        ClientController.connect(1337);
         System.out.print("\n");
         CommandController cmd = new CommandController();
         System.out.println("Enter Command " +
