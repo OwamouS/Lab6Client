@@ -33,7 +33,9 @@ public class StdCommandList implements CommandList {
         Commandgroup_counting_by_coordinates commandgroup_counting_by_coordinates = new Commandgroup_counting_by_coordinates();
         CommandChangePort commandChangePort = new CommandChangePort();
         CommandConnect commandConnect = new CommandConnect();
+        CommandDisconnect disconnect = new CommandDisconnect();
 
+        commands.put("disconnect",disconnect);
         commands.put("help", commandHelp);
         commands.put("replace_if_greater",commandreplaceIfGreater);
         commands.put("info", commandInfo);

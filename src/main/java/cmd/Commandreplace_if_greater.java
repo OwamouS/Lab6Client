@@ -1,4 +1,5 @@
 package cmd;
+import Control.Initializer;
 import Control.TableController;
 import productdata.Product;
 import productdata.ReaderProductBuilder;
@@ -13,32 +14,42 @@ import java.util.*;
  *
  */
 
-public class Commandreplace_if_greater implements Command{
+public class Commandreplace_if_greater implements Command, Preparable{
 
     private static final long serialVersionUID = 1337000014L;
 
+    Product product = null;
+    String key = null;
+
     @Override
     public String execute(String[] args) {
-        int c = 0;
-        for(String key : TableController.getCurrentTable().getKey()){
-            if(key.equals(args[0])){
-                c++;
-            }
-        }
-        if(c==0){
-            return ("No such key\nAvailable keys: " + TableController.getCurrentTable().getKey());
-        }else{
-            for (Map.Entry<String, Product> map : TableController.getCurrentTable().getSet()) {
-                if (map.getKey().compareTo(args[0]) == 0) {
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-                    Product product = ReaderProductBuilder.buildProduct(reader);
-                    if (product != null && product.getPrice() > map.getValue().getPrice()) {
-                        TableController.getCurrentTable().replace(map.getKey(), product);
-                    }
+        if (product == null || key == null){
+            System.out.print(key);
+            prepare(args);
+            execute(args);
+        }else {
+            int c = 0;
+            for (String key : TableController.getCurrentTable().getKey()) {
+                if (key.equals(args[0])) {
+                    c++;
                 }
             }
-            return ("Element has been replaced");
+            if (c == 0) {
+                return ("No such key\nAvailable keys: " + TableController.getCurrentTable().getKey());
+            } else {
+                for (Map.Entry<String, Product> map : TableController.getCurrentTable().getSet()) {
+                    if (map.getKey().compareTo(args[0]) == 0) {
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+                        Product product = ReaderProductBuilder.buildProduct(reader);
+                        if (product != null && product.getPrice() > map.getValue().getPrice()) {
+                            TableController.getCurrentTable().replace(map.getKey(), product);
+                        }
+                    }
+                }
+                return ("Element has been replaced");
+            }
         }
+        return null;
     }
 
     /**
@@ -50,5 +61,26 @@ public class Commandreplace_if_greater implements Command{
     @Override
     public String toString() {
         return "replace_if_greater";
+    }
+
+    @Override
+    public void prepare(String[] args) {
+        if (args == null) {
+            String key;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            try {
+                do {
+                    key = reader.readLine();
+                    if (key == null) System.out.println("Error: null key.");
+                } while (key == null);
+                this.product = ReaderProductBuilder.buildProduct(reader);
+            } catch (Exception e) {
+                System.out.println("Key is null, please try again with valid key...");
+            }
+        }
+        else{
+            this.product = Initializer.build(args);
+            this.key = args[0];
+        }
     }
 }

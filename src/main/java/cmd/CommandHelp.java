@@ -8,7 +8,7 @@ import java.util.Arrays;
  *
  */
 
-public class CommandHelp implements Command {
+public class CommandHelp implements Command, Local {
 
     private static final long serialVersionUID = 1337000008L;
 
@@ -37,7 +37,7 @@ public class CommandHelp implements Command {
                     "replace_if_greater key {element}: replace the value by key, if the price of new value is greater than the old \n" +
                     "min_by_name: output any object from the collection whose name field value is minimal \n" +
                     "group_counting_by_coordinates: group the elements of the collection by the value of the coordinates field, display the number of elements in each group \n" +
-                    "filter_less_than_manufacturer manufacturer: display elements whose manufacturer ID field value is less than the specified");
+                    "filter_less_than_manufacturer manufacturer: display elements whose manufacturer Name field value is less than the specified");
         }
         return null;
     }

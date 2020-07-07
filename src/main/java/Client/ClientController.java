@@ -14,7 +14,7 @@ public class ClientController {
     private static InetAddress destIP = null;
     private static int destPort = 1337;
 
-    public static Reply handleRequest(Request request){
+    public static Reply handleRequest(Request request) {
         byte[] serializedRequest = Serializer.serialize(request);
         assert serializedRequest != null;
         byte[] reply = null;

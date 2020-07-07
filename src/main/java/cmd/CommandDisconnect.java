@@ -1,9 +1,9 @@
 package cmd;
 
 import Client.ClientController;
-import Client.Sender;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  * break the programm
@@ -11,18 +11,19 @@ import java.io.IOException;
  *
  */
 
-public class CommandExit implements Command, Local{
+public class CommandDisconnect implements Command, Serializable {
+
+    private static final long serialVersionUID = 13370000020L;
 
     @Override
-    public String execute(String[] args) throws IOException {
+    public String execute(String[] args){
         try {
             if (args.length == 1) {
                 System.out.println("There is no args for this command!");
             }
         }catch (NullPointerException e) {
-            //ClientController.getClientSocket().close();
-            System.out.println("Program completion...");
-            System.exit(0);
+            ClientController.getClientSocket().close();
+            return "disconnect";
         }
         return null;
     }

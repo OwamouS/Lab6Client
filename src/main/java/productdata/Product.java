@@ -137,4 +137,5 @@ public class Product implements Serializable {
     public static  void setIdCounter(int value){
         idCounter = value;
     }
+
 }
